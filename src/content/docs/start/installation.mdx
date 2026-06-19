@@ -1,19 +1,60 @@
 ---
-title: Installation
-description: Install Prevail in 30 seconds with curl | bash, via Homebrew, or build from source with Bun. macOS and Linux supported; Windows via WSL.
+title: Install Prevail
+description: Download the native Prevail app for macOS or Windows — signed and notarized, no setup. Or install the CLI engine with curl, Homebrew, or from source.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-Prevail ships as a single self-contained binary. Pick the method you like.
+Most people want the **desktop app**. It's a native, signed and notarized build with the engine bundled in — download, drag to Applications, launch. There's nothing else to set up.
 
-<Aside type="tip" title="Prefer a GUI?">
-This page covers the **CLI**. There's also a native macOS app — **[Prevail Desktop](/desktop/overview/)** — with the same vault and council, no terminal required. Grab the `.dmg` from the [desktop releases](https://github.com/fru-dev3/prevail-desktop/releases).
+## Download the app
+
+<CardGrid>
+  <LinkCard
+    title="Download for macOS →"
+    href="https://github.com/fru-dev3/prevail-desktop/releases/latest/download/Prevail-mac-arm64.dmg"
+    description="Apple Silicon · macOS 13+ · signed & notarized .dmg" />
+  <LinkCard
+    title="Download for Windows →"
+    href="https://github.com/fru-dev3/prevail-desktop/releases/latest/download/Prevail-windows-x64-setup.exe"
+    description="Windows 10/11 · x64 · signed installer (.exe)" />
+</CardGrid>
+
+You can also grab any version from the [releases page](https://github.com/fru-dev3/prevail-desktop/releases) or [prevail.sh](https://prevail.sh).
+
+<Steps>
+
+1. **Download** the `.dmg` (macOS) or `.exe` (Windows) above.
+
+2. **Install.** On macOS, drag **Prevail.app** to `/Applications`. On Windows, run the installer.
+
+3. **Launch.** Builds are notarized, so there's no Gatekeeper "damaged" warning and no right-click dance.
+
+4. **Explore the demo.** The app opens in demo mode with a pre-populated household vault. Look around, then point it at your own folder when you're ready (Settings → Vault).
+
+</Steps>
+
+<Aside type="tip" title="Nothing to configure first">
+The app bundles the Prevail engine, so it works on its own. Installing the CLIs (Claude, Codex, etc.) or adding an OpenRouter key just unlocks more models — see [Models & providers](/desktop/models/).
 </Aside>
 
-## Install
+### Auto-update
+
+The app updates itself. When a new release ships, Prevail downloads it in the background and offers to relaunch — no reinstalling. You can check manually in Settings → About.
+
+## Requirements
+
+- **macOS 13+ (Apple Silicon)** or **Windows 10/11 (x64)**.
+- Optional: one or more of `claude`, `codex`, `agy`, `ollama` on your `PATH`, and/or an [OpenRouter](https://openrouter.ai) key. The bundled engine handles the rest.
+- An existing vault, or just use the built-in demo — no setup required.
+
+---
+
+## Install the CLI engine
+
+The same engine that powers the app is also a standalone CLI — a terminal cockpit, scriptable commands, a `--json` API, and the MCP server. Reach for it when you want automation or a headless box. See [The CLI & engine](/cli/overview/).
 
 <Tabs syncKey="install">
   <TabItem label="curl | bash">
@@ -23,10 +64,11 @@ This page covers the **CLI**. There's also a native macOS app — **[Prevail Des
 
     The installer detects your platform, downloads the matching binary from the
     latest GitHub release, and places it on your `PATH` (typically
-    `~/.local/bin/prevail`). Then just run:
+    `~/.local/bin/prevail`). Then:
 
     ```bash
-    prevail
+    prevail        # launch the terminal cockpit
+    prevail demo   # explore the synthetic demo vault first
     ```
   </TabItem>
 
@@ -44,7 +86,7 @@ This page covers the **CLI**. There's also a native macOS app — **[Prevail Des
 
     ```bash
     git clone https://github.com/fru-dev3/prevail-cli
-    cd prevail
+    cd prevail-cli
     bun install
     bun run build        # compiles dist/prevail
     ./dist/prevail
@@ -59,45 +101,14 @@ This page covers the **CLI**. There's also a native macOS app — **[Prevail Des
   </TabItem>
 </Tabs>
 
-<Aside type="note">
-The binary is also published as `aru` (the project's former name). Both names point to the same program — use whichever you prefer.
-</Aside>
-
-## First launch
-
-<Steps>
-
-1. **Run `prevail`.** The first launch starts a ~30-second wizard (you can re-run it any time with `prevail init`).
-
-2. **Pick a vault.** Choose the bundled demo vault — synthetic, safe to explore — or point Prevail at your own folder. You can always switch later.
-
-3. **Let it probe your CLIs.** Prevail auto-detects which of `claude`, `codex`, `agy`, and `ollama` are installed and logged in, and shows their status in the cockpit.
-
-4. **Ask something.** Type a question, or `/council <question>` to fan it out to every available engine at once.
-
-</Steps>
-
-Want to look around with zero risk first?
+### Verify a CLI install
 
 ```bash
-prevail demo
+prevail doctor          # checks your vault and which AI CLIs it can see
+prevail doctor --debug  # also dumps the tail of ~/.prevail/debug.log
 ```
 
-This boots the synthetic **"Alex Rivera"** vault — 20+ fully-populated life domains, sample skills, logs, and benchmark questions — with no real personal data. It's the fastest way to understand the cockpit before pointing it at your own life.
-
-## Verify your install
-
-```bash
-prevail doctor
-```
-
-`doctor` checks that your vault is well-formed and reports which AI CLIs it can see, with versions. Add `--debug` to also dump the tail of `~/.prevail/debug.log`:
-
-```bash
-prevail doctor --debug
-```
-
-## Upgrading
+### Upgrading the CLI
 
 <Tabs syncKey="install">
   <TabItem label="curl | bash">
@@ -114,31 +125,30 @@ prevail doctor --debug
   </TabItem>
   <TabItem label="From source">
     ```bash
-    cd prevail && git pull && bun install && bun run build
+    cd prevail-cli && git pull && bun install && bun run build
     ```
   </TabItem>
 </Tabs>
 
 ## Platform support
 
-| Platform | Status |
-|---|---|
-| macOS arm64 (Apple Silicon) | ✅ Native binary |
-| macOS x86_64 (Intel) | ✅ Native binary |
-| Linux x86_64 | ✅ Native binary |
-| Linux arm64 | ✅ Native binary |
-| Windows | ⚠️ Via WSL only |
+| Platform | Desktop app | CLI engine |
+|---|---|---|
+| macOS arm64 (Apple Silicon) | ✅ Signed & notarized | ✅ Native binary |
+| macOS x86_64 (Intel) | — | ✅ Native binary |
+| Windows x64 | ✅ Signed installer | ⚠️ Via WSL |
+| Linux x86_64 / arm64 | — | ✅ Native binary |
 
-A terminal with UTF-8 and true color is required. Prevail is tested on iTerm2, kitty, alacritty, WezTerm, Ghostty, and GNOME Terminal, and should work in any modern `xterm-256color` terminal. See [Platform support](/reference/platform/) for details on the Windows situation.
+See [Platform support](/reference/platform/) for details.
 
 ## What gets installed where
 
 | Path | What it holds |
 |---|---|
-| `~/.local/bin/prevail` (or Homebrew prefix) | The binary |
+| The app (Applications / Program Files) | Prevail Desktop + the bundled engine |
 | `~/.prevail/` | Machine-local state: config, secrets, connector auth, session DB |
-| `<your vault>/` | Your domains, logs, journals — the part you sync |
+| `<your vault>/` | Your domains, memory, logs, journals — the part you sync |
 
 <Aside type="caution" title="Keep secrets out of sync">
-`~/.prevail/` contains secrets (Telegram tokens, OAuth refresh tokens) and machine-local state. If you sync your vault folder, sync `<vault>/` **only** and **exclude `~/.prevail/`**. See [Syncing your vault](/vault/sync/).
+`~/.prevail/` holds machine-local secrets (tokens, OAuth refresh tokens). If you sync your vault, sync the **vault folder only** and exclude `~/.prevail/`. See [Syncing your vault](/vault/sync/).
 </Aside>

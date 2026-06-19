@@ -1,0 +1,67 @@
+---
+title: Memory & self-learning
+description: How Prevail learns you — every chat is captured as a durable intent the moment you send it, distilled into per-domain memory, and read back into future conversations so the app gets sharper with use.
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This is the feature that makes Prevail *yours*. A normal chatbot forgets you between sessions. Prevail **remembers** — and the more you use it, the more it knows your situation, so its answers get more specific over time.
+
+## How it works
+
+```
+  you send a message
+        │
+        ▼
+  ① intent captured        raw transcript written immediately — never lost
+        │
+        ▼
+  ② distilled              the distillation daemon condenses chats into memory
+        │
+        ▼
+  ③ _memory.md             per-domain memory, plain markdown you own
+        │
+        ▼
+  ④ read back              fed into the next chat in that domain as context
+```
+
+### 1. Every chat becomes an intent
+
+The moment you hit send, Prevail writes the message — and the reply — to a durable **intent ledger**. This happens *before* anything else, so a raw transcript of what you asked is never lost, even if a model errors out mid-answer.
+
+### 2. Intents are distilled into memory
+
+A background **distillation daemon** condenses each domain's conversations into a compact summary: the facts, decisions, and context worth keeping. You don't trigger this — it just happens.
+
+### 3. Memory lives in your vault
+
+The result is `_memory.md` inside each domain folder — **plain markdown you own**. Open it, edit it, correct it, or delete a line you don't want remembered. It syncs with the rest of your vault.
+
+### 4. Memory is read back automatically
+
+On your next message in that domain, Prevail loads `_memory.md` as context. So when you ask a follow-up next week, it already knows your situation — you don't re-explain.
+
+<Aside type="tip">
+Because memory is just markdown, you're always in control. Want Prevail to forget something? Edit `_memory.md`. Want to seed a domain with what it should know? Write it in.
+</Aside>
+
+## The context meter
+
+Each domain shows how much context it's carrying — recent chats plus distilled memory. It's a quick read on how well Prevail "knows" that part of your life, and a nudge to prune or top up.
+
+→ [Context Score](/engine/context-score/) explains the underlying signal.
+
+## What's captured, and where it stays
+
+| Artifact | Lives in | What it is |
+|---|---|---|
+| Intent ledger | `~/.prevail/` (machine-local) | The raw, durable transcript of every turn |
+| `_memory.md` | `<domain>/` (in your vault) | Distilled per-domain memory, read back into chats |
+| `_log/` | `<domain>/` (in your vault) | A dated one-line decision log |
+| `_journal/` | `<domain>/` (in your vault) | Longer-form notes |
+
+All of it is **local-first** — nothing leaves your machine unless you send a message to a cloud model. Run a domain on a local model and the entire learning loop stays on-device.
+
+→ [Vault structure](/vault/structure/) · [Logs & journal](/vault/logs-journal/) · [Privacy & local-first](/engine/privacy/)

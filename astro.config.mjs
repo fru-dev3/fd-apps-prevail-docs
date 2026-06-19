@@ -10,12 +10,12 @@ export default defineConfig({
   trailingSlash: "ignore",
   integrations: [
     starlight({
-    title: "Prevail Docs",
+    title: "Prevail",
     description:
-      "A council of AI for life's hardest questions. Prevail runs Claude, Codex, Antigravity, and Ollama in parallel and a chair model writes the verdict. Local-first, markdown-native, free and open source.",
-    tagline: "A council of AI for life's hardest questions.",
+      "Prevail is your private AI that learns you and gets sharper every time you use it — a local-first life-OS for macOS and Windows. A native app runs a council of models per life-domain, grounded in a markdown vault you own. Free and open source.",
+    tagline: "AI for your life, not your job.",
     logo: {
-      src: "./src/assets/logo.png",
+      src: "./src/assets/logo.svg",
       alt: "Prevail",
       replacesTitle: false,
     },
@@ -23,11 +23,11 @@ export default defineConfig({
     head: [
       {
         tag: "meta",
-        attrs: { property: "og:image", content: "https://docs.prevail.sh/og-image.png?v=2" },
+        attrs: { property: "og:image", content: "https://docs.prevail.sh/og-image.png?v=3" },
       },
       {
         tag: "meta",
-        attrs: { name: "twitter:image", content: "https://docs.prevail.sh/og-image.png?v=2" },
+        attrs: { name: "twitter:image", content: "https://docs.prevail.sh/og-image.png?v=3" },
       },
       {
         tag: "meta",
@@ -64,7 +64,7 @@ export default defineConfig({
       {
         icon: "github",
         label: "GitHub",
-        href: "https://github.com/fru-dev3/prevail-cli",
+        href: "https://github.com/fru-dev3/prevail-desktop",
       },
     ],
     editLink: {
@@ -86,18 +86,22 @@ export default defineConfig({
         label: "Start here",
         items: [
           { label: "What is Prevail?", slug: "start/introduction" },
-          { label: "Installation", slug: "start/installation" },
+          { label: "Install Prevail", slug: "start/installation" },
           { label: "Quickstart", slug: "start/quickstart" },
           { label: "Core concepts", slug: "start/concepts" },
         ],
       },
       {
-        label: "The cockpit",
+        label: "The desktop app",
         items: [
-          { label: "Layout & navigation", slug: "cockpit/layout" },
-          { label: "Keyboard shortcuts", slug: "cockpit/keyboard" },
-          { label: "Slash commands", slug: "cockpit/slash-commands" },
-          { label: "The ConfigBar", slug: "cockpit/configbar" },
+          { label: "Tour", slug: "desktop/overview" },
+          { label: "Chat, domains & council", slug: "desktop/chat" },
+          { label: "Models & providers", slug: "desktop/models" },
+          { label: "Memory & self-learning", slug: "desktop/memory" },
+          { label: "Demo mode & starter packs", slug: "desktop/demo" },
+          { label: "The benchmark viewer", slug: "desktop/benchmarks" },
+          { label: "Settings & integrations", slug: "desktop/settings" },
+          { label: "Remote access (your phone)", slug: "desktop/remote" },
         ],
       },
       {
@@ -110,65 +114,59 @@ export default defineConfig({
         ],
       },
       {
-        label: "The vault",
+        label: "Your vault",
         items: [
           { label: "Vault structure", slug: "vault/structure" },
           { label: "Domains", slug: "vault/domains" },
           { label: "Skills", slug: "vault/skills" },
           { label: "Logs & journal", slug: "vault/logs-journal" },
           { label: "Syncing your vault", slug: "vault/sync" },
+          { label: "Privacy & local-first", slug: "engine/privacy" },
         ],
       },
       {
-        label: "Connectors",
+        label: "Integrations",
         items: [
           { label: "Connector overview", slug: "connectors/overview" },
           { label: "Using connectors", slug: "connectors/using" },
           { label: "Building a connector", slug: "connectors/building" },
-        ],
-      },
-      {
-        label: "Benchmarks",
-        items: [
-          { label: "The canonical benchmark", slug: "benchmarks/overview" },
-          { label: "Running & scoring", slug: "benchmarks/running" },
-        ],
-      },
-      {
-        label: "Going further",
-        items: [
           { label: "Telegram & your phone", slug: "advanced/telegram" },
           { label: "Scheduled briefings", slug: "advanced/briefings" },
           { label: "The MCP server", slug: "advanced/mcp" },
         ],
       },
       {
-        label: "Desktop app",
+        label: "The CLI & engine",
+        collapsed: true,
         items: [
-          { label: "Prevail Desktop", slug: "desktop/overview" },
-        ],
-      },
-      {
-        label: "Engine & data",
-        items: [
+          { label: "The CLI (the engine)", slug: "cli/overview" },
+          { label: "The terminal cockpit", slug: "cli/terminal" },
+          { label: "CLI command reference", slug: "reference/cli" },
+          { label: "The engine --json API", slug: "engine/json-api" },
           { label: "Architecture", slug: "engine/architecture" },
           { label: "Context Score", slug: "engine/context-score" },
           { label: "The domain manifest", slug: "engine/manifest" },
           { label: "Onboarding", slug: "engine/onboarding" },
           { label: "Backup & archive", slug: "engine/backup-archive" },
           { label: "Heartbeat", slug: "engine/heartbeat" },
-          { label: "Privacy & local-only", slug: "engine/privacy" },
-          { label: "The engine --json API", slug: "engine/json-api" },
+        ],
+      },
+      {
+        label: "Benchmarks",
+        collapsed: true,
+        items: [
+          { label: "The canonical benchmark", slug: "benchmarks/overview" },
+          { label: "Running & scoring", slug: "benchmarks/running" },
         ],
       },
       {
         label: "Reference",
+        collapsed: true,
         items: [
-          { label: "CLI command reference", slug: "reference/cli" },
           { label: "Configuration", slug: "reference/configuration" },
           { label: "Security & threat model", slug: "reference/security" },
-          { label: "Extending Prevail", slug: "reference/extending" },
           { label: "Platform support", slug: "reference/platform" },
+          { label: "Extending Prevail", slug: "reference/extending" },
         ],
       },
     ],

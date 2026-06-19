@@ -1,0 +1,124 @@
+---
+title: The terminal cockpit
+description: The Prevail terminal cockpit — layout, keyboard shortcuts, slash commands, and the ConfigBar. The keyboard-first TUI for running Prevail from a terminal.
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+The **cockpit** is the terminal UI you get when you run `prevail`. It's keyboard-first, with three zones: a sidebar on the left, a workspace on the right, and the ConfigBar along the bottom.
+
+<figure>
+  <img src="/img/cli-cockpit.gif" alt="The Prevail terminal cockpit in motion — navigating domains, switching tabs, and reading the workspace." loading="lazy" />
+  <figcaption>Navigating domains and tabs in the live cockpit.</figcaption>
+</figure>
+
+```
+┌─ prevAIl ─────────────────────────────────────────────────────────────────┐
+│  domains            │  [chat] · state · quick start · prompts · skills    │
+│  ───────────────    │  ───────────────────────────────────────────────    │
+│  ▸ wealth      ●    │   council  ● ON       framework  ◆ BLUF             │
+│    health      ·    │  ─ chat ──────────────────────────────────────────  │
+│    tax         ·    │   you › what's new in tax this quarter?             │
+│    career      ·    │   ai  › Three deltas worth pulling forward …       │
+│  apps  [s]          │                                                     │
+│  ───────────────    │  ─ ConfigBar ─────────────────────────────────────  │
+│    1password   ✓    │  Council·Framework·Lens·Web·Save·Serendipity·Auto   │
+└─────────────────────┴─────────────────────────────────────────────────────┘
+```
+
+## Layout
+
+- **Sidebar** — two stacked lists: your **domains** (with `●` active / `·` idle markers) and your **apps**/connectors below (`✓` connected, `!` needs attention, `·` not configured). Press **`s`** to swap focus between them.
+- **Tab strip** — every domain has the same tabs: **chat · state · quick start · prompts · skills**. Press **`e`** to edit the active markdown tab in your `$EDITOR`.
+- **ConfigBar** — the per-turn dials along the bottom (see below).
+
+## The ConfigBar
+
+The ConfigBar carries everything that can change turn-to-turn, so you never dig through menus:
+
+| Dial | What it controls |
+|---|---|
+| **Council** | Fan this turn out to every model, or use a single one. → [The council](/council/overview/) |
+| **Framework** | The answer's structure — BLUF, SCQA, pros/cons, steelman… → [Frameworks](/council/frameworks/) |
+| **Lens** | The angle the panel takes. → [Lenses](/council/lenses/) |
+| **Web** | Allow this turn to reach the internet (default: off). |
+| **Save** | Whether the turn is written to the domain's log. |
+| **Serendipity** | Inject a cross-domain wildcard for lateral ideas. |
+| **Auto** | Let Prevail pick sensible dials for the question. |
+
+Each domain remembers its own ConfigBar settings.
+
+## Keyboard shortcuts
+
+| Key | Action |
+|---|---|
+| `↑` / `↓` | Move between domains (or apps, depending on focus) |
+| `s` | Swap focus between the **domains** and **apps** lists |
+| `e` | Edit the active markdown tab in `$EDITOR` |
+| `n` | Scaffold a new domain folder |
+| `r` | Rescan the vault and re-probe models |
+| `/` | Start a slash command |
+| `q` / `Ctrl-C` | Quit (`Ctrl-C` also aborts an in-flight turn) |
+
+<Aside type="tip">
+`$EDITOR` is whatever your shell exports — `vim`, `nano`, `code -w`, `hx`. Set it in your shell profile so `e` opens your editor of choice.
+</Aside>
+
+## Slash commands
+
+Inside the chat pane, anything starting with `/` is a command. Type `/help` to list them all; most have short aliases.
+
+### Session & engines
+
+| Command | Aliases | What it does |
+|---|---|---|
+| `/help` | | List every slash command |
+| `/clear` | | Reset the conversation (keeps your config) |
+| `/exit` | `/quit`, `/q` | Return to the cockpit |
+| `/claude` · `/codex` · `/antigravity` · `/ollama` `[model]` | `/agy` | Switch this chat to that model |
+| `/model <name>` | | Set the model on the current CLI; `/model default` clears it |
+
+### The council
+
+| Command | What it does |
+|---|---|
+| `/council [prompt]` | Fan the question to every available model; the chair synthesizes a verdict |
+| `/council use <cli> …` | Set which models sit on the council |
+| `/council chair [cli] [model]` | Pin which model acts as the chair |
+| `/council config` | Show the current council configuration |
+| `/gut <text>` | Capture your gut take before synthesis — the chair weighs it in |
+
+### Shaping the answer
+
+| Command | Aliases | What it does |
+|---|---|---|
+| `/framework <id>` | `/fw` | Apply a framework: `bluf`, `win`, `scqa`, `sbar`, `ooda`, `proscons`, `steelman` |
+| `/web [on\|off\|status]` | | Toggle web access for the turn (default: off) |
+
+### Memory & recall
+
+| Command | Aliases | What it does |
+|---|---|---|
+| `/distill` | `/skill` | Synthesize this conversation into a reusable `SKILL.md` draft |
+| `/search <query>` | `/s` | Full-text search across every past chat, any domain |
+| `/history [n]` | `/h` | Recall your last *n* prompts in this domain |
+
+### Integrations & observability
+
+| Command | Aliases | What it does |
+|---|---|---|
+| `/connectors [test\|oauth] <id>` | `/conn` | List connectors or run a connector's auth flow |
+| `/telegram [sub]` | `/tg` | Manage Telegram from the cockpit |
+| `/briefing [sub]` | | Manage scheduled briefings |
+| `/heatmap [days]` | `/heat` | Show an activity heatmap |
+| `/watch [limit]` | `/obs` | Monitor live vault changes |
+
+<Aside type="tip">
+Anything you can do with a slash command, you can usually also do from the shell with a `prevail …` subcommand — handy for scripting and cron. See the [CLI command reference](/reference/cli/).
+</Aside>
+
+## Requirements
+
+The cockpit needs a **UTF-8, true-color** terminal. It's tested on iTerm2, kitty, alacritty, WezTerm, Ghostty, and GNOME Terminal. If the banner or chips look broken, your terminal probably isn't in `xterm-256color` mode. → [Platform support](/reference/platform/)

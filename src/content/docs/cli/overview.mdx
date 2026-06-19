@@ -1,0 +1,47 @@
+---
+title: The CLI (the engine)
+description: The Prevail CLI is the engine that powers the desktop app — also usable standalone as a terminal cockpit, scriptable commands, a --json API, and an MCP server. For power users and automation.
+sidebar:
+  order: 1
+---
+
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+The **Prevail CLI is the engine.** The [desktop app](/desktop/overview/) bundles it as a sidecar and drives it under the hood — so everything the app does, the engine does. You can also run it standalone from a terminal.
+
+<Aside type="tip" title="Most people want the app">
+If you're not sure, [download the desktop app](/start/installation/) — it ships with the engine inside. Reach for the CLI directly when you want a terminal cockpit, scripting, cron jobs, or to run Prevail on a headless box.
+</Aside>
+
+## What the CLI gives you
+
+- **A terminal cockpit** — a keyboard-first TUI with a domain sidebar, per-domain workspace, and a ConfigBar of per-turn dials. → [The terminal cockpit](/cli/terminal/)
+- **Scriptable commands** — every interactive action has a `prevail …` subcommand for shells and cron. → [CLI command reference](/reference/cli/)
+- **A `--json` engine API** — a stable NDJSON contract that any front-end (including the desktop app) can drive. → [The engine --json API](/engine/json-api/)
+- **An MCP server** — expose Prevail to other agents. → [The MCP server](/advanced/mcp/)
+
+## Install
+
+```bash
+curl -fsSL https://prevail.sh/install | bash
+prevail            # launch the terminal cockpit
+prevail demo       # explore the synthetic demo vault first
+prevail doctor     # check your vault and which models it can see
+```
+
+Homebrew and from-source options are on the [install page](/start/installation/#install-the-cli-engine).
+
+## The same vault, the same engine
+
+The CLI and the desktop app read the **same vault format** and run the **same engine**. Use the app on your laptop and the CLI on a server, both pointed at one synced vault — they're interchangeable surfaces over the same files.
+
+<CardGrid>
+  <LinkCard title="The terminal cockpit →" href="/cli/terminal/" description="Layout, keyboard shortcuts, slash commands, and the ConfigBar." />
+  <LinkCard title="CLI command reference →" href="/reference/cli/" description="Every prevail subcommand, for scripting and automation." />
+  <LinkCard title="The engine --json API →" href="/engine/json-api/" description="The NDJSON contract the front-ends drive." />
+  <LinkCard title="Engine architecture →" href="/engine/architecture/" description="How the engine reads the vault, runs the council, and writes back." />
+</CardGrid>
+
+<Aside type="note" title="A note on surfaces">
+There's also a thin standalone TUI client (`prevail-tui`) that drives the engine over the same `--json` contract as the desktop app. It's a reference client and not the focus of these docs — the desktop app and this CLI are the two surfaces to know.
+</Aside>

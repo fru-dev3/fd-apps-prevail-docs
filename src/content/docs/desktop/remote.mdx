@@ -1,0 +1,40 @@
+---
+title: Remote access (your phone)
+description: Reach Prevail away from your desk — a loopback-bound, allowlisted WebUI that serves the same app to a browser over Tailscale, plus the Telegram bridge for chat from anywhere.
+sidebar:
+  order: 8
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Prevail lives on your machine, but you don't have to be at your machine to use it. There are two ways off the desk — both **off by default** and locked down when you turn them on.
+
+## The WebUI
+
+The desktop app can serve the **exact same UI** to a web browser — no separate mobile app, no duplicate interface. The frontend talks to the backend through one bridge (Tauri IPC on the desktop, HTTP/SSE in the browser), so the browser view *is* the app.
+
+<Steps>
+
+1. **Settings → Remote (WebUI)** — turn it on.
+
+2. Prevail binds to **loopback only** and enforces an **allowlist** — it isn't exposed to your network.
+
+3. **Reach it over [Tailscale](https://tailscale.com).** Your phone joins the same tailnet as your machine and opens the WebUI as if it were local — encrypted, private, no ports opened to the public internet.
+
+</Steps>
+
+<Aside type="caution" title="Loopback + allowlist by design">
+The WebUI never listens on a public interface. It's loopback-bound and allowlisted so the only way in is a private network you control (like Tailscale). See [Security & threat model](/reference/security/).
+</Aside>
+
+## The Telegram bridge
+
+For quick questions from your phone without opening a browser, the **gateway** bridges Prevail to Telegram. Ask a question in a chat, get the council's verdict back — with a **mandatory chat-ID allowlist** so only you can talk to it.
+
+→ [Telegram & your phone](/advanced/telegram/)
+
+## Scheduled briefings
+
+Pair remote access with **briefings** and Prevail comes to you: a verdict on "what changed in wealth this week?" can land on your phone at 7am.
+
+→ [Scheduled briefings](/advanced/briefings/)

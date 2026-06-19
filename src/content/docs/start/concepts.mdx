@@ -1,76 +1,80 @@
 ---
 title: Core concepts
-description: The five nouns that make up Prevail — vault, domain, council, connector, and skill — and how they fit together.
+description: The six nouns that make up Prevail — vault, domain, council, model, memory, and skill — and how they fit together.
 sidebar:
   order: 4
 ---
 
-Five nouns make up the whole of Prevail. Learn these and everything else is detail.
+A handful of nouns make up the whole of Prevail. Learn these and everything else is detail.
 
 ## Vault
 
-A **vault** is a folder on your disk that holds your life. It's the root that contains every domain. Nothing about it is special — it's plain files — which is exactly the point: you can edit it in any editor, search it with `grep`, version it with `git`, and sync it with iCloud or Tailscale.
+A **vault** is a folder on your disk that holds your life. It's the root that contains every domain. Nothing about it is special — it's plain files — which is the point: edit it in any editor, search it with `grep`, version it with `git`, sync it with iCloud or Tailscale.
 
-You choose where it lives during the first-run wizard. Switch vaults any time. The bundled demo vault (`prevail demo`) is a fully-populated synthetic one.
+You choose where it lives (Settings → Vault). The built-in demo vault is a fully-populated synthetic household, safe to explore.
 
 → [Vault structure](/vault/structure/)
 
 ## Domain
 
-A **domain** is one area of your life: `wealth`, `health`, `tax`, `career`, `vision`. Concretely, it's a subfolder of the vault containing a handful of markdown files (`state.md`, `QUICKSTART.md`, `PROMPTS.md`, `config.md`), document folders, a `skills/` folder, and auto-written `_log/` and `_journal/` folders.
+A **domain** is one area of your life: `wealth`, `health`, `tax`, `career`, `vision`. Concretely, it's a subfolder of the vault holding a few markdown files (`soul.md`/`state.md`, document folders, a `skills/` folder, and auto-written `_memory.md`, `_log/`, and `_journal/`).
 
-Any folder with a `state.md` is a domain. Prevail ships ~20 standard ones but you can add your own — press `n` in the cockpit, or just `mkdir` it.
-
-Each domain remembers its own settings: the framework and lens you set on `wealth` stay on `wealth`.
+Any folder with a `state.md` (or `soul.md`) becomes a domain. Add one from the sidebar (`+ new domain`) or just `mkdir` it. Each domain remembers its own settings and its own memory — what you set on `wealth` stays on `wealth`.
 
 → [Domains](/vault/domains/)
 
 ## Council
 
-The **council** is Prevail's headline mechanic. Instead of asking one model, you ask several — Claude, Codex, Antigravity, Ollama — *in parallel*. Each answers independently. Then a **chair** model reads every reply and writes a single synthesized verdict, plus a panel highlighting where the panelists diverged.
+The **council** is Prevail's headline mechanic. Instead of asking one model, you ask several — in parallel. Each answers independently. Then a **chair** model reads every reply and writes a single synthesized verdict, plus a panel highlighting where the panelists diverged.
 
-You convene it per-question with `/council <prompt>` or leave **Council ● ON** so every question fans out.
+Convene it per-question on the Council tab, or pick *Council* in the model selector so every question fans out.
 
 → [The council](/council/overview/)
 
-## Connector
+## Model
 
-A **connector** integrates a real-world app — your bank, calendar, email, password manager — so its data can flow into the vault. Each connector declares how it authenticates: `api`, `oauth`, `mcp`, `browser`, or `manual`. Prevail ships reference connectors for Plaid, 1Password, Google Calendar, GitHub, LinkedIn, YouTube Analytics, and more.
+Prevail brings no models of its own. A **model** is something you already have: an installed CLI (`claude`, `codex`, `agy`, `ollama`) **or** any of 200+ hosted models through a single [OpenRouter](https://openrouter.ai) key. Switch models per turn; context carries across. Run a sensitive domain entirely on a local model that never leaves your machine.
 
-Connectors appear in the apps sidebar with a live auth status. You can test, run OAuth flows, and invoke individual connector skills from the shell or the cockpit.
+→ [Models & providers](/desktop/models/)
 
-→ [Connector overview](/connectors/overview/)
+## Memory
+
+Prevail is **self-learning**. The moment you send a message it's captured as an **intent** — a raw, durable transcript that's never lost — and distilled into per-domain **memory** (`_memory.md`) that's read back into every future chat. This is what makes the app get sharper the more you use it.
+
+→ [Memory & self-learning](/desktop/memory/)
 
 ## Skill
 
-A **skill** is a reusable unit of work, stored as a `SKILL.md` markdown file under `<domain>/skills/`. It describes when to run it, what inputs it needs, and the steps to follow — "synthesize this month's wealth changes," "review a lease for red flags."
-
-Skills are just markdown, so you edit them in any editor and share them via git. The fastest way to make one is `/distill`, which turns the conversation you just had into a skill draft.
+A **skill** is a reusable unit of work, stored as a `SKILL.md` markdown file under `<domain>/skills/`. It describes when to run it, what inputs it needs, and the steps to follow — "synthesize this month's wealth changes," "review a lease for red flags." Skills are just markdown, so you edit and share them via git.
 
 → [Skills](/vault/skills/)
+
+:::note[Connectors]
+A **connector** integrates a real-world app — your bank, calendar, email, password manager — so its data can flow into the vault. They're optional and off until you turn them on. See [Connectors](/connectors/overview/).
+:::
 
 ---
 
 ## How they fit together
 
 ```
-                         ┌──────────────── vault (a folder you own) ───────────────┐
-                         │                                                          │
-   you ──ask──▶  cockpit │   domain: wealth/   ── state.md · skills/ · _log/ ...    │
-                  │      │   domain: health/                                        │
-                  │      │   domain: tax/                                           │
-                  │      └──────────────────────────────────────────────────────────┘
+                     ┌──────────────── vault (a folder you own) ───────────────┐
+                     │                                                          │
+   you ──ask──▶  app │   domain: wealth/  ── state.md · _memory.md · skills/    │
+                  │  │   domain: health/                                        │
+                  │  │   domain: tax/                                           │
+                  │  └──────────────────────────────────────────────────────────┘
                   │
-                  ├──fan out──▶  council  ──▶  claude · codex · agy · ollama
+                  ├──fan out──▶  council  ──▶  model · model · model · model
                   │                                  │
                   │                            chair synthesizes
                   │                                  ▼
-                  └──reads context from──▶  connectors  ──▶  bank · calendar · email
+                  └──remembers──▶  intent ledger  ──▶  _memory.md (read back next time)
 ```
 
-1. You open a **domain** in the **cockpit** and ask a question.
-2. Prevail reads that domain's markdown (and any **connector** data) as context.
-3. If the **council** is on, the question fans out to every engine; a chair writes the verdict.
-4. The turn is logged back into the vault, and you can `/distill` it into a **skill**.
+1. You open a **domain** in the app and ask a question.
+2. Prevail reads that domain's markdown — including its **memory** — as context.
+3. If the **council** is on, the question fans out to every **model**; a chair writes the verdict.
+4. The turn is captured as an **intent** and distilled back into the domain's memory, so the next chat is sharper.
 
-Everything is a file. Nothing leaves your machine except the prompts you send to the CLIs you already use.
+Everything is a file. Nothing leaves your machine except the prompts you send to the models you chose.

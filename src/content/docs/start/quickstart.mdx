@@ -1,112 +1,80 @@
 ---
 title: Quickstart
-description: From zero to your first council verdict in about a minute — boot the cockpit, ask a question, convene the council, and turn a conversation into a reusable skill.
+description: From launch to your first council verdict in about a minute — open the app, pick a domain, ask, convene the council, and watch Prevail start to learn you.
 sidebar:
   order: 3
 ---
 
 import { Steps, Aside } from '@astrojs/starlight/components';
 
-This is the 60-second tour. It assumes you've [installed Prevail](/start/installation/).
+This is the 60-second tour of the **desktop app**. It assumes you've [installed Prevail](/start/installation/). (Prefer the terminal? See the [CLI quickstart](/cli/overview/).)
 
-## Boot the cockpit
+## 1. Launch into demo mode
 
-```bash
-prevail demo     # safe synthetic vault — explore first
-prevail          # use your own vault
-```
+Open Prevail. Every launch starts in **demo mode** with a pre-populated household vault — realistic domains, data, and chat history — so you can explore with zero risk before pointing it at your own life.
 
-You land in the cockpit:
+<figure>
+  <img src="/img/desktop-home.png" alt="Prevail Desktop home screen — domain sidebar on the left, a model picker, and 'What should we work on?' with domain cards." loading="lazy" />
+  <figcaption>The home screen — domains on the left, your models along the input bar, and a prompt asking what you want to work on.</figcaption>
+</figure>
 
-```
-┌─ prevAIl ─────────────────────────────────────────────────────────────────┐
-│  domains            │  [chat] · state · quick start · prompts · skills    │
-│  ───────────────    │  ───────────────────────────────────────────────    │
-│  ▸ wealth      ●    │   council  ● ON       framework  ◆ BLUF             │
-│    health      ·    │   vault    ▸ open     ◇ configure                   │
-│    tax         ·    │                                                     │
-│    career      ·    │  ─ chat ──────────────────────────────────────────  │
-│    chief       ·    │   you › what's new in tax this quarter?             │
-│    vision      ·    │   ai  › Three deltas worth pulling forward …       │
-│                     │                                                     │
-│  apps  [s]          │   ▸ tools     ◆ Council ON     ◇ configure         │
-│  ───────────────    │                                                     │
-│    1password   ✓    │  claude ✓   codex ✓   gemini ·   ollama ✓          │
-└─────────────────────┴─────────────────────────────────────────────────────┘
-```
+- **Left sidebar:** every life-domain, with pinned ones up top. `+ new domain` adds one.
+- **Header tabs:** **Chat**, **Council**, **Benchmark**, plus **Insights**, **Usage**, **Preferences**, and **Back up**.
+- **Input bar:** your prompt, a framework/lens picker, and the model selector.
 
-- **Left sidebar:** every life domain, plus every connected app below it.
-- **Right workspace:** the active domain, with a consistent tab strip — `chat · state · quick start · prompts · skills`.
-- **Bottom:** the ConfigBar carrying every per-turn dial.
-
-## Get around
+## 2. Pick a domain and ask
 
 <Steps>
 
-1. **Move between domains** with `↑` / `↓`.
+1. **Click a domain** in the sidebar — say `wealth`. The chat is now grounded in that domain's real state and history.
 
-2. **Swap focus to the apps list** (and back) with `s`.
+2. **Pick a model** in the input bar — an installed CLI (Claude, Codex, Antigravity, Ollama) or any model via OpenRouter.
 
-3. **Edit the active markdown tab** in your `$EDITOR` with `e`.
+3. **Type a question** and press Enter:
 
-4. **Start a slash command** by typing `/`. `/help` lists every one.
-
-5. **Quit** with `q`.
+   ```text
+   should I sell or rent the condo?
+   ```
 
 </Steps>
 
-Full list: [Keyboard shortcuts](/cockpit/keyboard/).
+The reply streams in live, grounded in everything that domain already knows about you.
 
-## Ask your first questions
+## 3. Convene the council
 
-Inside the chat pane, type:
-
-```text
-should I sell or rent the condo?
-```
-
-That goes to your single active CLI. To get the whole council instead:
-
-```text
-/council should I sell or rent the condo?
-```
-
-Prevail fans the question to every available engine in parallel, then a chair model synthesizes one verdict — with a panel showing exactly where the panelists disagreed.
-
-```text
-/framework bluf      switch the answer's structure to Bottom Line Up Front
-/web on               allow this turn to reach the internet
-/distill              turn this whole conversation into a reusable skill
-```
+Switch to the **Council** tab (or pick *Council* in the model selector) and ask the same question. Prevail fans it out to every available model in parallel, then a **chair** synthesizes one verdict — with a panel showing exactly where the panelists disagreed.
 
 <Aside type="tip">
-You don't have to type `/council` every time. Toggle **Council ● ON** in the ConfigBar and *every* question fans out until you toggle it off.
+Disagreement is the point. When two strong models split on "sell" vs "rent," the *reason* they diverge is usually the real decision you need to make.
 </Aside>
 
-## Save what you learn
+→ [How the council works](/council/overview/)
 
-Two things happen automatically as you work:
+## 4. Watch it start to learn you
 
-- Every turn writes a one-line summary to `<domain>/_log/YYYY-MM-DD.md` — your vault keeps its own decision log.
-- `/distill` synthesizes the current conversation into a `SKILL.md` draft under `<domain>/skills/`, so a good workflow becomes a one-click action next time.
+You don't have to do anything to make Prevail remember. The moment you send a message it's captured as an **intent** — a durable transcript — and distilled into that domain's memory (`_memory.md`), which is read back into your next chat. Ask a follow-up tomorrow and it already knows where you left off.
 
-→ [Logs & journal](/vault/logs-journal/) · [Skills](/vault/skills/)
+→ [Memory & self-learning](/desktop/memory/)
 
-## Put it on your phone
+## 5. Make it yours
 
-```bash
-prevail telegram setup <bot-token>     # token from @BotFather
-prevail telegram add-user <chat-id>    # mandatory allowlist
-prevail daemon --telegram              # poll Telegram + tick briefings
-```
+When you're ready to leave the demo:
 
-Now `/council`, `/domain wealth`, and `/framework bluf` all work from anywhere.
+<Steps>
 
-→ [Telegram & your phone](/advanced/telegram/)
+1. **Settings → Vault** — point Prevail at your own folder (or let it create one).
+
+2. **Import a starter pack** if you want a ready-made domain set for your situation (Family, Freelancer, High-Income, Creator, and more).
+
+3. **Settings → Models** — install a CLI or add an OpenRouter key to unlock more models.
+
+</Steps>
+
+→ [Demo mode & starter packs](/desktop/demo/)
 
 ## Where to go next
 
 - **Understand the model:** [Core concepts](/start/concepts/)
-- **Master the interface:** [Slash commands](/cockpit/slash-commands/)
+- **Tour the whole app:** [Desktop tour](/desktop/overview/)
 - **Go deep on the headline feature:** [The council](/council/overview/)
-- **Connect your real apps:** [Connectors](/connectors/overview/)
+- **Put it on your phone:** [Remote access](/desktop/remote/) · [Telegram](/advanced/telegram/)

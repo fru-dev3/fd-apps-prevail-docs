@@ -1,88 +1,78 @@
 ---
 title: Prevail
-description: A self-learning AI harness that runs local and cloud models in parallel as a council, while a chair writes the verdict. Every decision is remembered as markdown you own, so it evolves to fit your life. Local-first, free and open source.
+description: Your private AI that learns you and gets sharper every time you use it. A native, local-first app for macOS and Windows that runs a council of models per life-domain, grounded in a markdown vault you own. Free and open source.
 template: splash
 hero:
-  tagline: A self-learning council of AI that evolves to fit your life. Ask a council. Prevail.
+  tagline: AI for your life, not your job. A private app that learns you, runs a council of models per life-domain, and keeps every byte on your machine.
   image:
-    file: ../../assets/logo.png
+    file: ../../assets/logo.svg
   actions:
+    - text: Download for macOS
+      link: https://github.com/fru-dev3/prevail-desktop/releases/latest/download/Prevail-mac-arm64.dmg
+      icon: apple
+      variant: primary
     - text: Get started
       link: /start/introduction/
       icon: right-arrow
-      variant: primary
-    - text: Install in 30 seconds
-      link: /start/installation/
-      icon: rocket
       variant: secondary
     - text: View on GitHub
-      link: https://github.com/fru-dev3/prevail-cli
+      link: https://github.com/fru-dev3/prevail-desktop
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-**Every part of your life — wealth, health, tax, career — is a folder of markdown.** Open one, ask a question, and Prevail fans it out to every AI CLI you already have logged in. A chair model reads all the replies and writes one decisive answer, with a dedicated panel surfacing the _disagreement_ — which is the point.
+**Every part of your life — wealth, health, tax, career — is a folder of markdown.** Prevail is a native app that opens one, grounds an AI in that domain's real history, and lets you fan a hard question out to a **council** of models at once. A chair reads every reply and writes one decisive answer, with the _disagreement_ called out — because that's usually where the real decision is.
 
-Works from your terminal or your phone. Single binary. No daemon, no Docker, no API keys to manage.
-
-```bash
-curl -fsSL https://prevail.sh/install | bash
-prevail demo
-```
+It runs on your machine. Nothing leaves unless you turn on an integration. And it **learns you**: every chat is remembered as markdown you own, distilled into per-domain memory that's fed back into the next conversation — so it gets sharper the more you use it.
 
 <figure>
-  <img src="/img/cli-cockpit.gif" alt="The Prevail terminal cockpit — 20+ life domains in the sidebar, a per-domain workspace, and the ConfigBar carrying every per-turn dial." loading="lazy" />
-  <figcaption>The cockpit at a glance — 20+ life domains, the active workspace, and a single ConfigBar carrying Council · Framework · Lens · Web · Save · Serendipity · Auto.</figcaption>
+  <img src="/img/desktop-home.png" alt="Prevail Desktop — the home screen: a sidebar of life-domains, a model picker, and 'What should we work on?' with domain cards." loading="lazy" />
+  <figcaption>Prevail Desktop — pick a domain, pick your models, ask. Demo mode is pre-loaded, so there's nothing to set up first.</figcaption>
 </figure>
 
 ## Why Prevail
 
 <CardGrid>
-  <Card title="A council, not a single voice" icon="comment-alt">
-    Four models answer in parallel. One chair synthesizes. Disagreement gets its own panel — that's where the value is.
+  <Card title="It learns you" icon="open-book">
+    Every chat is captured as an *intent* and distilled into per-domain memory. The app gets sharper the more you use it — your AI, shaped to your life.
   </Card>
-  <Card title="Domain = folder" icon="open-book">
-    `wealth/`, `health/`, `tax/`. Plain markdown. Edit anywhere. Sync with git, iCloud, or Tailscale. No database.
+  <Card title="A council, not one voice" icon="comment-alt">
+    Fan one question to several models in parallel. A chair synthesizes a verdict, and disagreement gets its own panel — that's where the value is.
   </Card>
-  <Card title="Uses CLIs you already pay for" icon="seti:powershell">
-    Spawns `claude`, `codex`, `agy`, `ollama` — inherits every login, MCP server, and skill. No API keys to wire up.
+  <Card title="Local-first by default" icon="approve-check">
+    Your vault, chats, and memory stay on your machine. Nothing leaves unless you turn on an integration. Run sensitive domains entirely on a local model.
   </Card>
-  <Card title="Local-private when it matters" icon="approve-check">
-    Ollama auto-detected at `localhost:11434`. Run health or wealth on a council that never leaves your machine.
+  <Card title="Domain = folder" icon="document">
+    `wealth/`, `health/`, `tax/`. Plain markdown you can edit anywhere and sync with git, iCloud, or Tailscale. No database, no lock-in.
   </Card>
-  <Card title="Off the keyboard" icon="phone">
-    A Telegram bridge puts the same cockpit, the same council, on your phone — with a mandatory chat-ID allowlist.
+  <Card title="Any model, one app" icon="puzzle">
+    Installed CLIs (Claude · Codex · Antigravity · Ollama) **or** bring-your-own via OpenRouter — one key, 200+ models. Switch per turn; context carries.
   </Card>
-  <Card title="Hardened by default" icon="shield">
-    Env-scrubbed subprocesses, prompt-injection–aware operating manual, OAuth tokens at `chmod 0600`.
+  <Card title="Free & open source" icon="heart">
+    GPL-3.0, developed in the open. Signed and notarized builds for macOS and Windows. Self-build and audit every line.
   </Card>
 </CardGrid>
 
-## Two ways to run it
+## Start in the app
 
-Prevail comes in two front-ends over the **same vault** — use either, or both on different machines.
+The fastest way to understand Prevail is to open it. Every launch starts in **demo mode** — a pre-populated household vault with realistic domains and chat history — so you can explore before pointing it at your own life.
 
 <CardGrid>
-  <LinkCard title="Prevail CLI →" href="/start/installation/" description="The full terminal cockpit — council, frameworks, lenses, briefings, Telegram, connectors, MCP. The complete surface." />
-  <LinkCard title="Prevail Desktop →" href="/desktop/overview/" description="A native macOS app — vault picker, domain sidebar, chat, council, and the benchmark viewer. No terminal required." />
+  <LinkCard title="Download Prevail →" href="/start/installation/" description="Signed, notarized builds for macOS and Windows. Drag to Applications and launch — no setup." />
+  <LinkCard title="Take the tour →" href="/desktop/overview/" description="The home screen, the council, models, memory, and settings — the whole app in one page." />
 </CardGrid>
 
-<figure>
-  <img src="/img/desktop-council.png" alt="Prevail Desktop — the council panel, with four CLIs answering in parallel and a synthesized verdict." loading="lazy" />
-  <figcaption>Prevail Desktop — the same council, the same vault, no terminal required.</figcaption>
-</figure>
-
-## Where to next
+## How it fits together
 
 <CardGrid>
-  <LinkCard title="What is Prevail?" href="/start/introduction/" description="The idea behind the council, the vault, and the cockpit." />
-  <LinkCard title="Install it" href="/start/installation/" description="curl | bash, Homebrew, or build from source." />
-  <LinkCard title="Quickstart" href="/start/quickstart/" description="From zero to your first verdict in 30 seconds." />
-  <LinkCard title="The council" href="/council/overview/" description="How four engines and a chair produce one answer." />
-  <LinkCard title="The vault" href="/vault/structure/" description="Your life as a folder of markdown you fully own." />
-  <LinkCard title="Desktop app" href="/desktop/overview/" description="The native macOS cockpit — no terminal required." />
+  <LinkCard title="What is Prevail?" href="/start/introduction/" description="The idea behind the council, the vault, and an AI that learns you." />
+  <LinkCard title="Quickstart" href="/start/quickstart/" description="From launch to your first council verdict in about a minute." />
+  <LinkCard title="The council" href="/council/overview/" description="How several models and a chair produce one answer." />
+  <LinkCard title="Your vault" href="/vault/structure/" description="Your life as a folder of markdown you fully own." />
+  <LinkCard title="Memory & self-learning" href="/desktop/memory/" description="The intent ledger and per-domain memory that make it sharper over time." />
+  <LinkCard title="The CLI & engine" href="/cli/overview/" description="The same engine, headless — for power users and automation." />
 </CardGrid>
 
-<p class="pv-signoff">Ask a council. <span>Prevail.</span></p>
+<p class="pv-signoff">AI for your life. <span>Prevail.</span></p>

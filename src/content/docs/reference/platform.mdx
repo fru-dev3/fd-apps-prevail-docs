@@ -7,9 +7,18 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-Prevail is Bun-only and ships as a single compiled binary per platform.
+Prevail has two surfaces with different platform stories: the **desktop app** (native, signed and notarized) and the **CLI engine** (a single compiled Bun binary per platform).
 
-## Operating systems
+## The desktop app
+
+| Platform | Status |
+|---|---|
+| macOS arm64 (Apple Silicon) | ✅ Signed & notarized |
+| Windows 10/11 (x64) | ✅ Signed installer |
+
+The app is the recommended way to run Prevail on both macOS and Windows. → [Download](/start/installation/)
+
+## The CLI engine
 
 | Platform | Status |
 |---|---|
@@ -17,12 +26,12 @@ Prevail is Bun-only and ships as a single compiled binary per platform.
 | macOS x86_64 (Intel) | ✅ Native binary |
 | Linux x86_64 | ✅ Native binary |
 | Linux arm64 | ✅ Native binary |
-| Windows (native) | ❌ Not yet |
+| Windows (native) | ❌ Not yet — use the desktop app |
 | Windows (WSL) | ✅ Supported |
 
-### About Windows
+### About Windows (CLI)
 
-There's no native Windows build yet. Bun's Windows support is preview-quality as of the 1.3.x series, and Prevail leans on Bun features (single-binary compile, `bun:sqlite`, process spawning) that need that support to be solid. Native Windows binaries will come once Bun's Windows story stabilizes. Until then, run Prevail under **WSL**, where it behaves like Linux.
+There's no native Windows build of the *standalone CLI* yet. Bun's Windows support is preview-quality as of the 1.3.x series, and the CLI leans on Bun features (single-binary compile, `bun:sqlite`, process spawning) that need that support to be solid. On Windows, run the **desktop app** (which ships a native build) or run the CLI under **WSL**, where it behaves like Linux.
 
 ## Terminal requirements
 

@@ -1,81 +1,58 @@
 ---
-title: Prevail Desktop
-description: The native macOS cockpit for AI council deliberation — same vault format, same benchmark, no terminal required. Built with Tauri 2, React 19, and Tailwind.
+title: Tour
+description: A tour of the Prevail desktop app — the home screen, the council, models, memory, benchmarks, and settings. The native, local-first life-OS for macOS and Windows.
 sidebar:
   order: 1
 ---
 
-import { Steps, Aside } from '@astrojs/starlight/components';
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-**Prevail Desktop** is the native macOS companion to the CLI — the same vault, the same council, the same canonical benchmark, with a graphical interface and no terminal required. It's built with Tauri 2, React 19, and Tailwind.
+**Prevail Desktop** is the native app — a private, local-first life-OS for **macOS and Windows**. It bundles the [engine](/cli/overview/), so there's nothing to wire up: download, launch, and you're in. Built with Tauri 2, React 19, and Tailwind 4.
 
 <figure>
-  <img src="/img/desktop-council.png" alt="Prevail Desktop — the council panel: four CLIs answering in parallel, a divergence panel, and a gold verdict card synthesized by the chair." loading="lazy" />
-  <figcaption>The council panel — four engines answer in parallel, the divergence panel surfaces where they split, and the chair writes one verdict.</figcaption>
+  <img src="/img/desktop-home.png" alt="Prevail Desktop home — a domain sidebar, model picker, header tabs (Chat, Council, Benchmark), and 'What should we work on?'." loading="lazy" />
+  <figcaption>The home screen — domains on the left, your models along the input bar, and the council one tab away.</figcaption>
 </figure>
 
-<Aside type="note">
-The desktop app and the CLI read the **same vault format**. Use the CLI on one machine and the desktop app on another against the same synced vault — they're two front-ends over one set of files.
-</Aside>
+## The layout
+
+| Area | What it is |
+|---|---|
+| **Domain sidebar** | Every life-domain in your vault, pinned ones up top. `+ new domain` adds one. |
+| **Header tabs** | **Chat** · **Council** · **Benchmark** — the three working surfaces. |
+| **Top-right** | **Insights**, **Usage**, **Preferences**, and **Back up**. |
+| **Input bar** | Your prompt, a framework/lens picker, and the model selector (single model or *Council*). |
+| **Status bar** | Connection state and a demo-mode banner with a one-click "set up your own vault." |
 
 ## What it does
 
-| Panel | What it gives you |
-|---|---|
-| **Vault picker** | Point at any folder; child folders with a `state.md` become domains |
-| **Domain sidebar** | Every domain in the chosen vault |
-| **Chat panel** | Send a prompt to one installed CLI (Claude / Codex / Antigravity / Ollama) and stream the reply live |
-| **Council panel** | Fan one question to every available CLI in parallel, then auto-synthesize a verdict with the chair you pick |
-| **Benchmark viewer** | Read every scored run from `<vault>/benchmark/runs/`, see the leaderboard, and click any row to drill into per-question prompts, replies, keyword hits, and judge rationale |
+<CardGrid>
+  <LinkCard title="Chat, domains & council" href="/desktop/chat/" description="Domain-grounded chat with any model, and the council with a chair-synthesized verdict." />
+  <LinkCard title="Models & providers" href="/desktop/models/" description="Installed CLIs (Claude, Codex, Antigravity, Ollama) or 200+ models via OpenRouter." />
+  <LinkCard title="Memory & self-learning" href="/desktop/memory/" description="Every chat becomes a durable intent and per-domain memory that's read back next time." />
+  <LinkCard title="Demo mode & starter packs" href="/desktop/demo/" description="Explore a pre-loaded household, then import a domain set for your situation." />
+  <LinkCard title="The benchmark viewer" href="/desktop/benchmarks/" description="Run and read scored benchmarks to see which model serves your decisions best." />
+  <LinkCard title="Settings & integrations" href="/desktop/settings/" description="Models, memory, safety, gateway, MCP, providers, remote — everything in one place." />
+</CardGrid>
 
-It spawns your existing `claude` / `codex` / `agy` / `ollama` CLIs as subprocesses — it brings no API keys of its own, exactly like the CLI.
+<Aside type="note" title="Same vault, same engine">
+The desktop app and the CLI read the **same vault format** and run the **same engine**. Use the app on your laptop and the CLI on a server against the same synced vault — they're two surfaces over one set of files.
+</Aside>
 
-<figure>
-  <img src="/img/desktop-benchmark.png" alt="Prevail Desktop — the benchmark viewer: a leaderboard ranking CLIs and council configurations by score across the 21-question canonical suite." loading="lazy" />
-  <figcaption>The benchmark viewer — every scored run ranked, so you can see which model or council serves <em>your</em> decisions best.</figcaption>
-</figure>
+## Local-first by default
 
-## Install
+Your vault, your chats, and the durable intent ledger stay on your machine. Nothing leaves unless you turn on an integration (a cloud model, the Telegram bridge, the WebUI). Secrets live in the system Keychain, not in the vault. Telemetry is **off** unless you explicitly opt in.
 
-<Steps>
-
-1. Download the latest `.dmg` from the [desktop releases page](https://github.com/fru-dev3/prevail-desktop/releases).
-
-2. Drag **Prevail.app** to `/Applications`.
-
-3. On first launch, right-click the app → **Open**, then confirm. (Early builds are unsigned; macOS remembers your choice after the first open. Signing and notarization are on the roadmap.)
-
-</Steps>
-
-## Requirements
-
-- macOS 13 or later.
-- One or more of `claude`, `codex`, `agy`, `ollama` installed and on your `$PATH` — the app spawns them directly.
-- An existing vault, or the [demo vault](https://github.com/fru-dev3/prevail-cli/tree/main/vault-demo).
-
-## Desktop vs CLI
-
-The desktop app is a focused MVP that proves the pattern in a GUI. Some things deliberately stay in the CLI for now:
-
-| Feature | CLI | Desktop |
-|---|---|---|
-| Chat with one CLI | ✅ | ✅ |
-| Council + chair-synthesized verdict | ✅ | ✅ |
-| Benchmark viewer & leaderboard | ✅ | ✅ |
-| Vault picker / domain sidebar | ✅ | ✅ |
-| Frameworks, lenses, web toggle | ✅ | — |
-| Skills, `/distill` | ✅ | — |
-| Scheduled briefings | ✅ | — |
-| Telegram bridge | ✅ | — |
-| MCP server | ✅ | — |
-| Connectors | ✅ | — |
-
-If you want the full surface — frameworks, lenses, briefings, Telegram, connectors, the MCP server — use the [CLI](/start/installation/). The desktop app focuses on the core loop: pick a vault, ask the council, read the verdict, study the benchmark.
+→ [Privacy & local-first](/engine/privacy/) · [Security & threat model](/reference/security/)
 
 ## How it's built
 
-- **Frontend:** Vite + React 19 + Tailwind, with framer-motion and lucide-react.
-- **Backend:** Tauri 2 (Rust) — `tauri-plugin-shell` to spawn the CLIs, `tauri-plugin-dialog` for the folder picker, `tauri-plugin-fs` to read `state.md` and benchmark JSON.
-- **Streaming:** Rust spawns the CLI, captures stdout in chunks, and emits them as Tauri events; the React UI updates per chunk so replies stream live.
+- **Frontend:** Vite + React 19 + Tailwind 4. Talks to the backend only through a single bridge (`bridge.ts`) — Tauri IPC on desktop, HTTP/SSE in the browser (so the same UI can be served to your phone).
+- **Backend (Rust):** Tauri 2 — the engine seam, the distillation daemon (self-learning), the Telegram and WebUI bridges, and ingestion/MCP.
+- **Bundled engine:** the `prevail` CLI ships as a Tauri `externalBin` sidecar, so the install is fully self-contained — no separate download, no daemon, no Docker.
 
-No sidecar binary, no bundled prevail, no daemon — it calls the CLIs already on your `PATH`.
+→ [Engine architecture](/engine/architecture/)
+
+## Get it
+
+[Download for macOS or Windows](/start/installation/) — signed, notarized, and self-updating. Then [take the quickstart](/start/quickstart/).

@@ -1,0 +1,63 @@
+---
+title: Chat, domains & council
+description: Domain-grounded chat in the Prevail desktop app — pick a domain, pick a model, ask. Fan a question to the council and read a chair-synthesized verdict.
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+The Chat and Council tabs are where most of the work happens. Everything here is **grounded in a domain** — Prevail reads that domain's state, history, and memory before it answers, so you don't repeat yourself.
+
+## Pick a domain
+
+Click any domain in the left sidebar — `wealth`, `health`, `tax`, `career`. The chat is now scoped to it. Pin the ones you use most so they sit at the top; add a new one with **`+ new domain`**.
+
+Each domain keeps its own conversation, its own memory, and its own default model and framework. Switching domains switches context completely.
+
+→ [Domains](/vault/domains/)
+
+## Chat with one model
+
+<Steps>
+
+1. **Pick a model** in the input bar — an installed CLI (Claude, Codex, Antigravity, Ollama) or any model via OpenRouter.
+
+2. **Type and send.** The reply streams in live, grounded in the domain.
+
+3. **Switch models mid-conversation** if you want a second take — context carries across the switch.
+
+</Steps>
+
+Use the **framework** and **lens** pickers in the input bar to shape *how* the answer comes back — Bottom Line Up Front, a decision matrix, a devil's-advocate pass, and so on.
+
+→ [Frameworks](/council/frameworks/) · [Lenses](/council/lenses/)
+
+## Convene the council
+
+Switch to the **Council** tab — or choose *Council* in the model selector — and ask. Prevail fans your question out to every available model **in parallel**:
+
+- Each model answers independently.
+- A **chair** model reads all the replies and writes one synthesized verdict.
+- A **divergence panel** surfaces exactly where the panelists disagreed.
+
+<Aside type="tip">
+The verdict is the answer; the divergence is the insight. When two strong models split, the reason they split is usually the real decision in front of you.
+</Aside>
+
+You choose how many models sit on the council and which one chairs it in [Settings → Council](/desktop/settings/).
+
+→ [How the council works](/council/overview/) · [Chair, verdicts & divergence](/council/verdicts/)
+
+## It remembers, automatically
+
+You never have to "save" a chat. The moment you send a message it becomes a durable **intent**, and Prevail distills each domain's conversations into memory that's read back into the next one. Come back tomorrow and it already knows where you left off.
+
+→ [Memory & self-learning](/desktop/memory/)
+
+## History & skills
+
+The input bar exposes a couple of shortcuts:
+
+- **`/ history`** — jump back through this domain's past turns.
+- **`/ skills`** — run a saved [skill](/vault/skills/) for this domain, or distill the current conversation into a new one.

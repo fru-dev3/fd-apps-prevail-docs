@@ -1,0 +1,58 @@
+---
+title: Settings & integrations
+description: Everything you can configure in the Prevail desktop app — models, council, memory, safety, connectors, the Telegram gateway, MCP, providers, remote WebUI, and demo mode.
+sidebar:
+  order: 7
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Everything Prevail does is configurable from one place. Settings is grouped so the common stuff is up top and the power features are clearly separated.
+
+## Models, council & skills
+
+| Setting | What it controls |
+|---|---|
+| **Models** | Detected CLIs and API providers; refresh, test, and start a chat with any model. → [Models & providers](/desktop/models/) |
+| **Council** | Which models sit on the panel, how many, and which one chairs the verdict. → [The council](/council/overview/) |
+| **Frameworks** | The answer structures available in the input bar. → [Frameworks](/council/frameworks/) |
+| **Skills** | Manage and edit reusable per-domain skills. → [Skills](/vault/skills/) |
+| **Benchmark** | Run the canonical suite and manage scored runs. → [Benchmark viewer](/desktop/benchmarks/) |
+
+## Privacy & safety
+
+| Setting | What it controls |
+|---|---|
+| **Privacy & telemetry** | Two independent opt-in toggles (usage analytics, crash reports) — both **off** by default, with a local log of every would-be event. |
+| **Safety** | Guardrails around what the engine and integrations are allowed to do. → [Security & threat model](/reference/security/) |
+
+<Aside type="note" title="Telemetry is off by default">
+Prevail collects nothing unless you opt in. If you do, what's sent is anonymous (a random local UUID — never your name, paths, or vault content) and allowlisted (a fixed set of event names; free text is dropped). Every event is also written to a local log you can read.
+</Aside>
+
+## Connect
+
+These are the integrations — all **off until you turn them on**.
+
+<CardGrid>
+  <LinkCard title="Connectors" href="/connectors/overview/" description="Pull data from real apps — bank, calendar, email, password manager — into the vault." />
+  <LinkCard title="Gateway (Telegram)" href="/advanced/telegram/" description="Reach Prevail from your phone over a Telegram bridge, with a mandatory chat-ID allowlist." />
+  <LinkCard title="MCP" href="/advanced/mcp/" description="Consume MCP servers, and expose Prevail itself as one to other tools." />
+  <LinkCard title="Remote (WebUI)" href="/desktop/remote/" description="Serve the same app to a browser — loopback-bound and allowlisted, reachable via Tailscale." />
+</CardGrid>
+
+## You & prep
+
+| Setting | What it controls |
+|---|---|
+| **Pro Profile** | Who you are, so answers are grounded in your real situation. |
+| **Memory & Context** | How chats are distilled into per-domain memory. → [Memory & self-learning](/desktop/memory/) |
+| **Daemons** | Background workers — the distillation daemon, scheduled [briefings](/advanced/briefings/), the gateway. |
+| **Vault** | Pick or create your vault folder, and import [starter packs](/desktop/demo/). |
+| **Demo Mode** | Switch between the demo household and your own vault. |
+
+## App
+
+**General**, **Appearance**, **Shortcuts**, and **About** (version, auto-update, licenses). Prevail keeps itself current — when a release ships, it downloads in the background and offers to relaunch.
+
+→ [Configuration reference](/reference/configuration/) for the underlying files.

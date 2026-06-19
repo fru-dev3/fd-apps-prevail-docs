@@ -1,82 +1,95 @@
 ---
 title: What is Prevail?
-description: Prevail is a self-learning AI harness that fans every hard question out to local and cloud models in parallel, then has a chair synthesize one verdict, against a vault of plain markdown you own that gets sharper the more you use it.
+description: Prevail is a private, local-first AI app that learns you and gets sharper every time you use it. It runs a council of models per life-domain, grounded in a markdown vault you own — with a native desktop app and a CLI engine underneath.
 sidebar:
   order: 1
 ---
 
-**Prevail** (styled `prevAIl`) is a terminal cockpit for the rest of your life.
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-Every part of your life — wealth, health, tax, career — is a folder of markdown. You open one, ask a question, and Prevail fans that question out to every AI CLI you already have logged in: [Claude Code](https://claude.com/code), [Codex](https://github.com/openai/codex), [Antigravity](https://github.com/google/antigravity-cli) (Google's `agy`), and your local [Ollama](https://ollama.com). They answer in parallel. A **chair** model reads all the replies and writes one decisive answer — with a dedicated panel surfacing where the panelists *disagreed*, which is the point.
+**Prevail** (styled `prevAIl`) is a private AI for your life — not your job.
 
-It runs from your terminal, or from your phone over a Telegram bridge. It ships as a single ~95 MB binary. No daemon, no Docker, no API keys to manage.
+Every part of your life — wealth, health, tax, career — is a folder of markdown. You open one in the **desktop app**, and the AI is grounded in that domain's real state and history. Ask a question and you can fan it out to a **council** of models at once — [Claude](https://claude.com/code), [Codex](https://github.com/openai/codex), [Antigravity](https://github.com/google/antigravity-cli), local [Ollama](https://ollama.com), or any of 200+ models via OpenRouter. A **chair** model reads every reply and writes one decisive answer, with a panel surfacing where the panelists *disagreed* — which is usually the real decision.
 
-**It is self-learning.** Every verdict and decision is written back to your vault as markdown you own. Over time that record becomes context the council reads on the next question, so Prevail evolves to fit your life and gets sharper the more you use it. And because it speaks to both your local model (Ollama, fully private) and the best cloud models, you get the best of both worlds in one harness.
+It runs on your machine. Nothing leaves unless you turn on an integration. And it **learns you**: every chat is captured as an *intent* and distilled into per-domain memory that's fed back into the next conversation — so Prevail evolves to fit your life and gets sharper the more you use it.
 
-:::caution[Alpha software]
-Prevail is an early, experimental alpha released for demonstration and testing. It is provided "as is", without warranty, and you use it at your own risk. It runs third-party AI tools and, unless Bunker Mode is on, may send data to cloud providers, so always review anything important yourself. [Feedback and bug reports](https://github.com/fru-dev3/prevail-desktop/issues/new) are very welcome and directly shape what comes next.
-:::
+<Aside type="caution" title="Alpha software">
+Prevail is an early, experimental alpha released for demonstration and testing. It is provided "as is", without warranty, and you use it at your own risk. It runs third-party AI tools and may send data to cloud providers unless you keep it on a local model, so always review anything important yourself. [Feedback and bug reports](https://github.com/fru-dev3/prevail-desktop/issues/new) are very welcome and directly shape what comes next.
+</Aside>
 
-## The three ideas
+## The desktop app is the product
 
-Prevail is built on three concepts. The rest of these docs are just detail on top of them.
+Most people should just [download the app](/start/installation/). It's a native, signed and notarized build for **macOS and Windows** — no terminal, no setup. Every launch starts in **demo mode** with a pre-populated household vault, so you can explore the whole thing before pointing it at your own life.
 
-### 1. The council
+Under the hood, the app bundles the **Prevail engine** (the [CLI](/cli/overview/)) as a self-contained sidecar — the same engine you can also run headless from a terminal for power use and automation. Two surfaces, one engine, one vault format.
 
-Ask one question; get answers from up to four different models at once; let a chair synthesize a single verdict. A single model is one voice with one set of blind spots. A **council** turns disagreement into signal — when Claude says "rent" and Codex says "sell," the *reason they diverge* is usually the actual decision you need to make.
+→ [Take the tour](/desktop/overview/)
+
+## The four ideas
+
+Prevail is built on four concepts. The rest of these docs are detail on top of them.
+
+### 1. It learns you
+
+Prevail is **self-learning**. The moment you send a message it's captured as an *intent* — a raw, never-lost transcript — and distilled into per-domain memory (`_memory.md`) that's read back into every future chat. The more you use it, the more it knows your situation, so answers get sharper and more specific over time.
+
+→ [Memory & self-learning](/desktop/memory/)
+
+### 2. The council
+
+Ask one question; get answers from several models at once; let a chair synthesize one verdict. A single model is one voice with one set of blind spots. A **council** turns disagreement into signal — when one model says "rent" and another says "sell," the *reason they diverge* is usually the actual decision you need to make.
 
 → [How the council works](/council/overview/)
 
-### 2. The vault
+### 3. The vault
 
-Your data is not in a database or a cloud. It's a folder. Each **domain** — `wealth/`, `health/`, `tax/` — is a subfolder of plain markdown files you can edit in any editor, grep from the shell, and sync with git, iCloud, or Tailscale. Prevail reads it as context and writes back a self-curating decision log. You own every byte.
+Your data isn't in a database or a cloud. It's a folder. Each **domain** — `wealth/`, `health/`, `tax/` — is a subfolder of plain markdown you can edit in any editor, grep from the shell, and sync with git, iCloud, or Tailscale. Prevail reads it as context and writes back a self-curating record. You own every byte.
 
 → [Vault structure](/vault/structure/)
 
-### 3. The cockpit
+### 4. Any model
 
-The interface that ties them together: a TUI (terminal UI) with a sidebar of your life domains and connected apps on the left, a per-domain workspace on the right, and a single **ConfigBar** along the bottom carrying every per-turn dial — Council, Framework, Lens, Web, Save, Serendipity, Auto.
+Prevail brings no models of its own. It drives the AI CLIs you already have installed — Claude, Codex, Antigravity, Ollama — **or** brings 200+ hosted models through a single **OpenRouter** key. Switch models per turn; context carries across. Run sensitive domains entirely on a local model that never leaves your machine.
 
-→ [Cockpit layout](/cockpit/layout/)
+→ [Models & providers](/desktop/models/)
 
 ## What makes it different
 
 | | |
 |---|---|
-| **Council, not a single voice** | Four models in parallel, one chair synthesizes. Disagreement gets its own panel. |
+| **It learns you** | Every chat becomes durable memory the AI reads next time. It gets sharper with use. |
+| **Council, not a single voice** | Several models in parallel, one chair synthesizes. Disagreement gets its own panel. |
+| **Local-first** | Your vault, chats, and memory stay on your machine. Nothing leaves unless you opt in. |
 | **Domain = folder** | Plain markdown. Edit anywhere. Sync however you like. No database. |
-| **Uses CLIs you already pay for** | Spawns `claude`, `codex`, `agy`, `ollama` — inherits every login, MCP server, and skill. No new API keys. |
-| **Local-private when it matters** | Ollama auto-detected. Run sensitive domains on a council that never leaves your machine. |
-| **Off the keyboard** | `prevail daemon --telegram` exposes the cockpit on your phone, chat-ID allowlist enforced. |
-| **Scheduled briefings** | A verdict on "what's new in wealth this week?" lands on your phone at 7am. |
-| **Self-curating vault** | Every chat writes a one-line summary to `<domain>/_log/`. The vault writes its own decision log. |
-| **Hardened by default** | Env-scrubbed subprocesses, prompt-injection–aware operating manual, OAuth tokens `chmod 0600`. |
+| **Any model** | Installed CLIs or 200+ models via OpenRouter. Switch per turn; context carries. |
+| **Off the keyboard** | A Telegram bridge and a loopback WebUI put the same app on your phone. |
+| **Hardened by default** | Secrets in the Keychain, allowlisted bridges, telemetry off unless you opt in. |
 
-## Two front-ends, one vault
+## Two surfaces, one engine
 
-Prevail comes two ways, both reading the **same markdown vault**:
+Prevail ships in two forms over the **same markdown vault**:
 
-- **[Prevail CLI](/start/installation/)** — the full terminal cockpit. Council, frameworks, lenses, scheduled briefings, the Telegram bridge, connectors, and the MCP server. This is the complete surface.
-- **[Prevail Desktop](/desktop/overview/)** — a native macOS app with a vault picker, domain sidebar, chat, council, and the benchmark viewer. No terminal required.
+<CardGrid>
+  <LinkCard title="Prevail Desktop →" href="/desktop/overview/" description="The native app for macOS and Windows. Domains, chat, council, memory, benchmarks, settings — no terminal required. This is where most people live." />
+  <LinkCard title="Prevail CLI (the engine) →" href="/cli/overview/" description="The same engine, headless. A terminal cockpit, scriptable commands, a --json API, and the MCP server — for power users and automation." />
+</CardGrid>
 
-Run the CLI on your main machine and the desktop app on another against the same synced vault — they're interchangeable views over one set of files.
+The desktop app *bundles* the engine, so installing the app is all you need. Reach for the CLI when you want a terminal cockpit, automation, or to run Prevail on a headless box.
 
 ## What Prevail is *not*
 
-Prevail is a **single-user terminal cockpit** for personal decisions. You run it on your own machine, with your own AI CLI credentials, against a folder of your own markdown.
+Prevail is a **single-user, local-first app** for personal decisions. You run it on your own machine, with your own AI credentials, against a folder of your own markdown.
 
-It is **not** a SaaS, **not** multi-tenant, **not** an enterprise audit-log system, **not** a replacement for a knowledge base. If you need any of those, Prevail is the wrong tool. Being deliberately small is the point — it keeps your data on your disk and your trust boundary at your own laptop.
+It is **not** a SaaS, **not** multi-tenant, **not** an enterprise audit system, **not** a replacement for a team knowledge base. Being deliberately small is the point — it keeps your data on your disk and your trust boundary at your own laptop.
 
 ## Requirements at a glance
 
-- One or more of: Claude Code, Codex, Antigravity (`agy`), or Ollama — installed and on your `$PATH`.
-- A terminal with UTF-8 and true color.
-- macOS or Linux (Windows via WSL).
-
-Prevail brings no models of its own. It spawns the CLIs you already have, inheriting every login and configuration.
+- **macOS 13+ (Apple Silicon)** or **Windows 10/11 (x64)** for the desktop app.
+- Optional: one or more of `claude`, `codex`, `agy`, `ollama` on your `PATH`, and/or an OpenRouter key. The bundled engine handles the rest.
+- No setup needed — launch and explore the demo, then point it at your own vault.
 
 ## Free and open source
 
-Prevail is MIT-licensed and developed in the open at [github.com/fru-dev3/prevail-cli](https://github.com/fru-dev3/prevail-cli). The bundled demo vault contains a synthetic persona ("Alex Rivera") with no real personal data — explore it freely.
+Prevail is **GPL-3.0** and developed in the open at [github.com/fru-dev3/prevail-desktop](https://github.com/fru-dev3/prevail-desktop) (app) and [github.com/fru-dev3/prevail-cli](https://github.com/fru-dev3/prevail-cli) (engine). Anyone may self-build and audit the code; any redistributed fork must stay open under the same license. The bundled demo vault contains a synthetic household with no real personal data — explore it freely.
 
-Ready? [Install Prevail](/start/installation/) or read about [the council](/council/overview/) first.
+Ready? [Install Prevail](/start/installation/) or [take the tour](/desktop/overview/) first.

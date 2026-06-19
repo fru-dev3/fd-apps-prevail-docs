@@ -1,0 +1,53 @@
+---
+title: Models & providers
+description: Every model Prevail can use — installed CLIs (Claude, Codex, Antigravity, Ollama) detected automatically, or 200+ hosted models through a single OpenRouter key.
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Prevail brings **no models of its own**. It runs the AI you already have — installed CLIs detected on your machine, or hosted models through a provider key. You pick which model answers, per turn, and context carries across switches.
+
+<figure>
+  <img src="/img/desktop-models.png" alt="Settings → Models — detected CLIs (Claude, Codex, Antigravity, Ollama) with a 'start chat' action, plus API providers like OpenRouter, LM Studio, and MLX." loading="lazy" />
+  <figcaption>Settings → Models — installed CLIs are auto-detected; API providers unlock hosted models with one key.</figcaption>
+</figure>
+
+## Installed CLIs
+
+Prevail auto-detects these on your `PATH` and shows their status. Each runs **locally** — Prevail spawns it as a subprocess and inherits its existing login, so there are no extra API keys to wire up.
+
+| CLI | What it is |
+|---|---|
+| <span class="cli-claude">Claude</span> | Anthropic's [Claude Code](https://claude.com/code) |
+| <span class="cli-codex">Codex</span> | OpenAI's [Codex](https://github.com/openai/codex) |
+| <span class="cli-antigravity">Antigravity</span> | Google's [Antigravity](https://github.com/google/antigravity-cli) (`agy`) |
+| <span class="cli-ollama">Ollama</span> | Your local [Ollama](https://ollama.com) models — fully private, never leaves your machine |
+
+Hit **Refresh models** in Settings → Models to re-probe after you install or log into one.
+
+## API providers (bring your own key)
+
+No install required — paste a key and you're done:
+
+- **[OpenRouter](https://openrouter.ai)** — one key for **200+ hosted models** (Claude, GPT, Gemini, Llama, and more). The simplest way to get every frontier model into Prevail.
+- **LM Studio** and **MLX** — local hosted-model runtimes, for fully on-device inference beyond Ollama.
+
+Add keys under **Settings → Providers**.
+
+<Aside type="tip" title="Mix local and cloud">
+Put a cloud model on the council for reach, and keep a local model (Ollama / MLX) for anything you'd rather not send anywhere. You can run an entire domain on a local-only model.
+</Aside>
+
+## Switching models
+
+- **Per turn:** pick the model in the input bar before you send. The next message can use a different one — the conversation context carries across.
+- **Per domain:** each domain remembers its own default model.
+- **On the council:** choose which models sit on the panel and which one chairs the verdict in [Settings → Council](/desktop/settings/).
+
+## Local & private
+
+Ollama (and LM Studio / MLX) models run entirely on your machine — Prevail talks to them at `localhost`, and nothing leaves. Combined with the local-first vault, that means you can run sensitive domains — health, wealth — on a council that never touches the cloud.
+
+→ [Privacy & local-first](/engine/privacy/)

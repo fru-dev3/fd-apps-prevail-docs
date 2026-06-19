@@ -1,0 +1,33 @@
+---
+title: The benchmark viewer
+description: Read every scored benchmark run inside the Prevail desktop app — a leaderboard ranking models and council configurations, with drill-down into per-question prompts, replies, and judge rationale.
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Which model actually serves *your* decisions best? The **Benchmark** tab answers that — not with someone else's leaderboard, but with runs scored against Prevail's canonical suite, in your own app.
+
+<figure>
+  <img src="/img/desktop-benchmark.png" alt="Prevail Desktop benchmark viewer — a leaderboard ranking models and council configurations by score across the canonical question suite." loading="lazy" />
+  <figcaption>The benchmark viewer — every scored run ranked, so you can see which model or council serves your decisions best.</figcaption>
+</figure>
+
+## What it shows
+
+- **A leaderboard** ranking every model and council configuration by score.
+- **Per-question drill-down** — click any row to see the prompt, each model's reply, keyword hits, and the judge's rationale.
+- **Council vs single model** — see what convening a panel actually buys you over one strong model.
+
+Runs are read straight from `<vault>/benchmark/runs/`, so the viewer reflects whatever you've scored — including the runs already present in demo mode.
+
+## Running a benchmark
+
+You can kick off runs from **Settings → Benchmark** (or from the [CLI](/benchmarks/running/)). Prevail asks each configured model the canonical question set, scores the answers, and writes the results back into your vault for the viewer to read.
+
+<Aside type="note">
+The benchmark is the same whether you run it from the app or the CLI — same questions, same scoring, results in the same place. See [The canonical benchmark](/benchmarks/overview/) for the methodology.
+</Aside>
+
+→ [The canonical benchmark](/benchmarks/overview/) · [Running & scoring](/benchmarks/running/)
