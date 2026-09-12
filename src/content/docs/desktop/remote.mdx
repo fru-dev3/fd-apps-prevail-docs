@@ -15,16 +15,25 @@ The desktop app can serve the **exact same UI** to a web browser — no separate
 
 <Steps>
 
-1. **Settings → Remote (WebUI)** — turn it on.
+1. **Settings → Remote (WebUI)** — turn it on, with **Reachable from other devices** on (it is by default).
 
-2. Prevail binds to **loopback only** and enforces an **allowlist** — it isn't exposed to your network.
+2. With [Tailscale](https://tailscale.com) installed, Prevail binds to this Mac's **Tailscale address only**: reachable from every device on your tailnet, encrypted end to end, never on the public internet. Without Tailscale it uses your local Wi-Fi network instead.
 
-3. **Reach it over [Tailscale](https://tailscale.com).** Your phone joins the same tailnet as your machine and opens the WebUI as if it were local — encrypted, private, no ports opened to the public internet.
+3. The settings page shows the address and a **QR code**. Scan it with your phone, sign in, and you are in the real app.
 
 </Steps>
 
-<Aside type="caution" title="Loopback + allowlist by design">
-The WebUI never listens on a public interface. It's loopback-bound and allowlisted so the only way in is a private network you control (like Tailscale). See [Security & threat model](/reference/security/).
+## Install it on your phone
+
+The WebUI is a full installable web app, so it runs as its own full-screen app with an icon, no App Store needed, and it stays signed in.
+
+- **iPhone (Safari):** open the address, tap **Share**, then **Add to Home Screen**.
+- **Android (Chrome):** open the address, tap the menu, then **Install app**.
+
+On a phone the sidebar becomes a drawer behind the **☰** button; everything else is the same app.
+
+<Aside type="caution" title="Private network only, by design">
+The WebUI never listens on a public interface. It binds to loopback, or to your Tailscale address, and rejects requests from any other host name, so the only way in is a private network you control. Prefer Tailscale over plain Wi-Fi: it encrypts the connection. See [Security & threat model](/reference/security/).
 </Aside>
 
 ## The Telegram bridge
