@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "true",
+  "buildCommand": "mkdir -p dist && echo retired > dist/index.html",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/install", "destination": "https://prevail.sh/install", "statusCode": 302 },
+    { "source": "/", "destination": "https://glyph.fru.dev/docs", "statusCode": 301 },
+    { "source": "/:path*", "destination": "https://glyph.fru.dev/docs", "statusCode": 301 }
+  ]
+}
